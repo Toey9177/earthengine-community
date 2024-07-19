@@ -21,7 +21,7 @@
 
 // [START earthengine__landsat01__radiance_toa]
 // Load a raw Landsat scene and display it.
-var raw = ee.Image('LANDSAT/LC08/C01/T1/LC08_044034_20140318');
+var raw = ee.Image('LANDSAT/LC08/C02/T1/LC08_044034_20140318');
 Map.centerObject(raw, 10);
 Map.addLayer(raw, {bands: ['B4', 'B3', 'B2'], min: 6000, max: 12000}, 'raw');
 
@@ -44,6 +44,7 @@ var surfaceReflectanceL4 = ee.ImageCollection('LANDSAT/LT04/C02/T1_L2');
 var surfaceReflectanceL5 = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2');
 var surfaceReflectanceL7 = ee.ImageCollection('LANDSAT/LE07/C02/T1_L2');
 var surfaceReflectanceL8 = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2');
+var surfaceReflectanceL9 = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2');
 // [END earthengine__landsat01__sr_collections]
 
 

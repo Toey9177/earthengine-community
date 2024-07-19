@@ -21,11 +21,13 @@
 
 // [START earthengine__ui04_events__events]
 // Load some images.
-var srtm = ee.Image('CGIAR/SRTM90_V4');
-var landsat8 = ee.Image('LANDSAT/LC8_L1T_32DAY_TOA/20130407');
+var dem = ee.Image('NASA/NASADEM_HGT/001');
+var veg = ee.Image('NOAA/VIIRS/001/VNP13A1/2022_06_02')
+  .select(['EVI', 'EVI2', 'NDVI']);
 
 // Make a drop-down menu of bands.
 var bandSelect = ui.Select({
+  placeholder: 'Select a band...',
   onChange: function(value) {
     var layer = ui.Map.Layer(imageSelect.getValue().select(value));
     // Use set() instead of add() so the previous layer (if any) is overwritten.
@@ -36,9 +38,10 @@ var bandSelect = ui.Select({
 // Make a drop down menu of images.
 var imageSelect = ui.Select({
   items: [
-    {label: 'SRTM', value: srtm},
-    {label: 'Landsat 8', value: landsat8}
+    {label: 'NASADEM', value: dem},
+    {label: 'VIIRS Veg', value: veg}
   ],
+  placeholder: 'Select an image...',
   onChange: function(value) {
     // Asynchronously get the list of band names.
     value.bandNames().evaluate(function(bands) {
@@ -94,7 +97,7 @@ ui.root.insert(0, panel);
 
 // [START earthengine__ui04_events__asynchronous]
 // Load and display an NDVI image.
-var ndvi = ee.ImageCollection('LANDSAT/LC8_L1T_8DAY_NDVI')
+var ndvi = ee.ImageCollection('LANDSAT/COMPOSITES/C02/T1_L2_8DAY_NDVI')
     .filterDate('2014-01-01', '2015-01-01');
 var vis = {min: 0, max: 1, palette: ['99c199', '006400']};
 Map.addLayer(ndvi.median(), vis, 'NDVI');

@@ -21,7 +21,7 @@
 
 // [START earthengine__reducers00_overview__ic_extrema]
 // Load and filter the Sentinel-2 image collection.
-var collection = ee.ImageCollection('COPERNICUS/S2')
+var collection = ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
     .filterDate('2016-01-01', '2016-12-31')
     .filterBounds(ee.Geometry.Point([-81.31, 29.90]));
 
@@ -36,7 +36,7 @@ Map.addLayer(collection.median(), {bands: ['B4', 'B3', 'B2'], max: 4000});
 
 // [START earthengine__reducers00_overview__combine]
 // Load a Landsat 8 image.
-var image = ee.Image('LANDSAT/LC08/C01/T1/LC08_044034_20140318');
+var image = ee.Image('LANDSAT/LC08/C02/T1/LC08_044034_20140318');
 
 // Combine the mean and standard deviation reducers.
 var reducers = ee.Reducer.mean().combine({

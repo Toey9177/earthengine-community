@@ -38,7 +38,7 @@ print(date.format(null, 'Australia/Tasmania'));  // 2020-08-18T10:00:00
 print(date.format(null, 'Etc/GMT-10'));  // 2020-08-18T10:00:00
 
 // Reference for Joda-Time format characters:
-// http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html
+// https://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html
 
 var datetime = ee.Date('1975-07-23T21:13:59');  // Defaults to UTC
 print(datetime); // Date (1972-07-25 21:13:59)
@@ -79,7 +79,7 @@ print(datetime.format('ZZ'));  // +00:00
 print(datetime.format('ZZZ'));  // UTC
 print(datetime.format('Z', 'PST8PDT'));  // -0700
 print(datetime.format('ZZ', 'PST8PDT'));  // -07:00
-print(datetime.format('ZZZ', 'PST8PDT'));  // Pacific Daylight Time
+print(datetime.format('ZZZ', 'PST8PDT'));  // PST8PDT
 
 // single quotes for text
 print(datetime.format("YY 'yada' MM"));  // 75 yada 07

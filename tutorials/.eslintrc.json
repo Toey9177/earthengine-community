@@ -16,9 +16,9 @@
     "impliedStrict": false
   },
   "rules": {
+    "camelcase": "off",
     "comma-dangle": "off",
     "guard-for-in": "off",
-    "ignoreEOLComments": true,
     "indent": "off",
     "max-len": ["error", {
         "code": 100

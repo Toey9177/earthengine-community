@@ -21,7 +21,7 @@
  */
 
 // [START earthengine__gettingStarted04__collection_load]
-var collection = ee.ImageCollection('LANDSAT/LC08/C01/T1');
+var collection = ee.ImageCollection('LANDSAT/LC08/C02/T1_TOA');
 // [END earthengine__gettingStarted04__collection_load]
 
 // [START earthengine__gettingStarted04__make_point]
@@ -36,7 +36,7 @@ var finish = ee.Date('2014-10-01');
 
 
 // [START earthengine__gettingStarted04__filter_ic]
-var filteredCollection = ee.ImageCollection('LANDSAT/LC08/C01/T1')
+var filteredCollection = ee.ImageCollection('LANDSAT/LC08/C02/T1_TOA')
   .filterBounds(point)
   .filterDate(start, finish)
   .sort('CLOUD_COVER', true);
@@ -54,5 +54,6 @@ var featureCollection = ee.FeatureCollection('TIGER/2016/States');
 var filteredFC = featureCollection.filter(ee.Filter.eq('NAME', 'California'));
 
 // Display the collection.
+Map.setCenter(-119.604, 37.798, 6);
 Map.addLayer(filteredFC, {}, 'California');
 // [END earthengine__gettingStarted04__filter_fc]

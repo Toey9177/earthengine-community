@@ -21,7 +21,7 @@
 
 // [START earthengine__import_export01__export_setup]
 // Load a landsat image and select three bands.
-var landsat = ee.Image('LANDSAT/LC08/C01/T1_TOA/LC08_123032_20140515')
+var landsat = ee.Image('LANDSAT/LC08/C02/T1_TOA/LC08_123032_20140515')
   .select(['B4', 'B3', 'B2']);
 
 // Create a geometry representing an export region.
@@ -60,6 +60,24 @@ Export.image.toDrive({
   }
 });
 // [END earthengine__import_export01__export_cogeo]
+
+// [START earthengine__import_export01__export_nodata]
+// Set a nodata value and replace masked pixels around the image edge with it.
+var noDataVal = -9999;
+landsat = landsat.unmask(noDataVal);
+
+Export.image.toDrive({
+  image: landsat,
+  description: 'imageNoDataExample',
+  crs: projection.crs,
+  scale: 2000,  // large scale for minimal demo
+  region: landsat.geometry(),  // full image bounds
+  fileFormat: 'GeoTIFF',
+  formatOptions: {
+    noData: noDataVal,
+  }
+});
+// [END earthengine__import_export01__export_nodata]
 
 // [START earthengine__import_export01__image_to_cloud]
 // Export the image to Cloud Storage.
@@ -136,8 +154,9 @@ Export.table.toAsset({
 
 
 // [START earthengine__import_export01__export_table]
-// Load a Landsat TOA image.
-var image = ee.Image('LANDSAT/LC08/T1_TOA/LC08_044034_20140318');
+// Load a Landsat image.
+var image = ee.Image('LANDSAT/LC08/C02/T1_TOA/LC08_044034_20140318');
+var projection = image.select('B2').projection().getInfo();
 
 // Create an arbitrary rectangle.
 var region = ee.Geometry.Rectangle(-122.2806, 37.1209, -122.0554, 37.2413);
